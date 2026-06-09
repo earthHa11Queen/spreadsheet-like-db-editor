@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    # docker-compose.yml の environment で上書きされますが、ローカル開発時用にデフォルト値を設定
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/postgres}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:your_password}
+    driver-class-name: org.postgresql.Driver
+  sql:
+    init:
+      mode: never

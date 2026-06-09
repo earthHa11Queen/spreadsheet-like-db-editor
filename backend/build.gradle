@@ -1,0 +1,77 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.4'
+    id 'io.spring.dependency-management' version '1.1.4'
+    id 'jacoco'
+}
+
+group = 'com.matsushita'
+version = '1.0.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = '17' // Ubuntu LTS環境を考慮し、安定のJava 17を指定
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+    all {
+        exclude group: 'org.slf4j', module: 'slf4j-nop'
+    }
+}
+    
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Spring Boot Core
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    
+    // Database Access (JDBC Template & PostgreSQL)
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    runtimeOnly 'org.postgresql:postgresql'
+
+    // Dynamic SQL Builder (動的テーブル・カラムへの安全なクエリ生成)
+    implementation 'org.mybatis.dynamic-sql:mybatis-dynamic-sql:1.5.0'
+
+    // Database Metadata Extraction (テーブル一覧や自動マッピングAPI用)
+    implementation 'us.fatehi:schemacrawler:16.20.5'
+    implementation 'us.fatehi:schemacrawler-postgresql:16.20.5'
+
+    // High Performance Excel/CSV Processing (インポート/エクスポート用)
+    implementation 'com.alibaba:easyexcel:3.3.3'
+
+    // Utilities
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    
+    // Markdown Generation (テーブル情報のMarkdown出力用など)
+    implementation 'com.vladsch.flexmark:flexmark-all:0.64.8'
+
+    // Testing
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+
+    // テスト実行時の文字化け対策 (常にUTF-8で実行)
+    systemProperty 'file.encoding', 'UTF-8'
+
+    // コンソールにテストの進捗(メソッドごとの成功・失敗など)を出力する
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+    }
+}
+
+jacocoTestReport {
+    dependsOn test // レポート作成前に必ずテストを実行する
+    reports {
+        html.required = true // HTML形式のレポートを出力する
+    }
+}

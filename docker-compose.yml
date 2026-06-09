@@ -1,0 +1,37 @@
+services:
+  db-editor-backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: db-editor-backend
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://main-db:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=your_password
+    ports:
+      - "8080:8080"
+    networks:
+      - db-net
+    restart: unless-stopped
+
+  db-editor-frontend:
+    # 開発時のホットリロード（HMR）を効かせるため、Nodeイメージを直接マウントしてViteを動かす構成
+    image: node:20-alpine
+    container_name: db-editor-frontend
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+    command: sh -c "npm install && chmod -R 755 node_modules/.bin && npm run dev -- --host 0.0.0.0"
+    ports:
+      - "5173:5173"
+    environment:
+      # バックエンドのAPIエンドポイントを指定（リモートサーバのIPやホスト名に合わせて適宜変更してください）
+      - VITE_API_URL=http://localhost:8080
+    networks:
+      - db-net
+    restart: unless-stopped
+
+networks:
+  # リモートサーバ上にすでに作成されているネットワークを想定
+  db-net:
+    external: true
