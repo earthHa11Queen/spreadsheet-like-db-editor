@@ -123,6 +123,28 @@ Active only when shortcut mode is ON (toggle with Ctrl+Shift+K).
 
 ---
 
+## Documentation
+
+Design documents and test specifications are located in the `docs/` directory.
+
+```
+docs/
+├── 00_DesignMemo/          # Initial design memo
+├── 01_BasicDesign/         # Basic design document
+├── 02_DetailDesignPlan/    # Detail design plan
+├── 03_ImplementPlan/       # Implementation plan (with progress log)
+├── 04_ApiDesign/           # API detail design (43 endpoints)
+└── 06_TestSpecs/           # Test specifications
+    ├── 01_UnitApiTest/
+    └── 02_UnitScreenTest/
+```
+
+The API design and test specifications were generated using an AI-assisted workflow
+based on the [Mirror Framework](https://github.com/earthHa11Queen/mirror-framework),
+a test design methodology developed for this project.
+
+---
+
 ## License
 
 [MIT](./LICENSE)
@@ -277,6 +299,28 @@ docker compose up -d
 - `index.html`の`</body>`直前に`<div id="portal"></div>`が必須
 - 日本語IME入力はダブルクリックまたはF2/Enterでオーバーレイを開いてから行う
 - セル編集は`cellActivationBehavior="double-click"`を使用
+
+---
+
+## ドキュメント
+
+設計書・テスト仕様書は`docs/`ディレクトリに格納しています。
+
+```
+docs/
+├── 00_DesignMemo/          # 初期設計メモ
+├── 01_BasicDesign/         # 基本設計書
+├── 02_DetailDesignPlan/    # 詳細設計作成計画
+├── 03_ImplementPlan/       # 実装計画（進捗ログ付き）
+├── 04_ApiDesign/           # API詳細設計書（43エンドポイント）
+└── 06_TestSpecs/           # テスト仕様書
+    ├── 01_UnitApiTest/
+    └── 02_UnitScreenTest/
+```
+
+API設計書およびテスト仕様書は、本プロジェクトのために開発したテスト設計方法論
+[Mirror Framework](https://github.com/earthHa11Queen/mirror-framework) に基づき、
+AIとの協働ワークフローで生成しました。
 
 ---
 
