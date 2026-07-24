@@ -140,7 +140,7 @@ docs/
 ```
 
 The API design and test specifications were generated using an AI-assisted workflow
-based on the [Mirror Framework](https://github.com/earthHa11Queen/mirror-framework),
+based on the [Mirror Framework](https://github.com/earthHa23Queen/mirror-framework),
 a test design methodology developed for this project.
 
 ---
@@ -319,7 +319,7 @@ docs/
 ```
 
 API設計書およびテスト仕様書は、本プロジェクトのために開発したテスト設計方法論
-[Mirror Framework](https://github.com/earthHa11Queen/mirror-framework) に基づき、
+[Mirror Framework](https://github.com/earthHa23Queen/mirror-framework) に基づき、
 AIとの協働ワークフローで生成しました。
 
 ---
